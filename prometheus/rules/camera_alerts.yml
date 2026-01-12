@@ -1,0 +1,30 @@
+groups:
+- name: camera_alerts
+  rules:
+
+  - alert: CameraExporterDown
+    expr: absent(mjpeg_up)
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Camera exporter down"
+      description: "MJPEG exporter is not responding."
+
+  - alert: LowCameraFPS
+    expr: mjpeg_fps < 10
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Low camera FPS"
+      description: "FPS has dropped below 10."
+
+  - alert: LowCameraBitrate
+    expr: mjpeg_bytes_per_sec < 100000
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Low camera bitrate"
+      description: "Camera stream bandwidth dropped."
