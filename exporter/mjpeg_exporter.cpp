@@ -102,7 +102,7 @@ void metrics_server() {
         double bps = mjpeg_bytes_per_sec();
 
         std::string body =
-            "# HELP mjpeg_fps MJPEG frames per second\n"
+            "# HELP mjpeg_fps MJPEG frames per second -- test message --\n\n"
             "# TYPE mjpeg_fps gauge\n"
             "mjpeg_fps " + std::to_string(fps) + "\n"
             "# HELP mjpeg_bytes_per_sec MJPEG bandwidth\n"
