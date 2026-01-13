@@ -18,30 +18,33 @@ std::atomic<bool> running{true};
 
 uint64_t last_frames = 0;
 uint64_t last_bytes = 0;
-auto last_time = std::chrono::steady_clock::now();
+
+auto last_fps_time = std::chrono::steady_clock::now();
+auto last_bps_time = std::chrono::steady_clock::now();
 
 double mjpeg_fps() {
     auto now = std::chrono::steady_clock::now();
-    double dt = std::chrono::duration<double>(now - last_time).count();
+    double dt = std::chrono::duration<double>(now - last_fps_time).count();
     if (dt <= 0.0) return 0.0;
 
     uint64_t frames = frame_count.load();
     double fps = (frames - last_frames) / dt;
 
     last_frames = frames;
-    last_time = now;
+    last_fps_time = now;
     return fps;
 }
 
 double mjpeg_bytes_per_sec() {
     auto now = std::chrono::steady_clock::now();
-    double dt = std::chrono::duration<double>(now - last_time).count();
+    double dt = std::chrono::duration<double>(now - last_bps_time).count();
     if (dt <= 0.0) return 0.0;
 
     uint64_t bytes = byte_count.load();
     double rate = (bytes - last_bytes) / dt;
 
     last_bytes = bytes;
+    last_bps_time = now;
     return rate;
 }
 
@@ -51,7 +54,6 @@ void mjpeg_reader(const std::string& host, int port) {
     hints.ai_socktype = SOCK_STREAM;
 
     if (getaddrinfo(host.c_str(), std::to_string(port).c_str(), &hints, &res) != 0) {
-        std::cerr << "getaddrinfo failed\n";
         return;
     }
 
@@ -102,7 +104,7 @@ void metrics_server() {
         double bps = mjpeg_bytes_per_sec();
 
         std::string body =
-            "# HELP mjpeg_fps MJPEG frames per second -- test message --\n\n"
+            "# HELP mjpeg_fps MJPEG frames per second\n"
             "# TYPE mjpeg_fps gauge\n"
             "mjpeg_fps " + std::to_string(fps) + "\n"
             "# HELP mjpeg_bytes_per_sec MJPEG bandwidth\n"
