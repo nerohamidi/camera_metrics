@@ -6,4 +6,7 @@ The USB Webcam is processed using the new Arduino Uno Q, a collaboration between
 
 Most of the coding was done on my MacBook, connecting to the microcontrollers using SSH. I'd like to give my thanks to oh-my-zsh for making the terminal experience even more pleasant. All the git commands were done using the terminal, GitHub desktop was not used at all.
 
-This readme.md file was written on my MacBook in neovim from the terminal.
+This readme.md file was written (mostly) on my MacBook in neovim from the terminal.
+
+Project operational! Full readme and demo video coming soon!
+
