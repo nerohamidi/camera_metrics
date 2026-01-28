@@ -1,3 +1,5 @@
+Demo video Link: https://drive.google.com/file/d/1CeahDCygqzYuBNiazsKlBZ-9BN5L3j2f/view?usp=sharing
+
 This project seeks to display the camera metrics of the Raspberry Pi Camera Module 3 and a USB Webcam using Grafana and Prometheus. 
 
 The Pi Camera Module 3 is processed using a Raspberry Pi 5 8 Gb version (pretty powerful!)
@@ -16,14 +18,20 @@ How to get things running:
 
 https://www.raspberrypi.com/documentation/computers/camera_software.html#stream-video-over-a-network-with-rpicam-apps
 
-2b. Start streaming, in my setup I cd into the mediamtx_parent folder and run ./mediamtx (this is assuming you have attached a pi camera module to the pi already)
+2b. 
+
+Start streaming, in my setup I cd into the mediamtx_parent folder and run ./mediamtx (this is assuming you have attached a pi camera module to the pi already)
+
+
 
 
 3a.
 
 You will need to donwnload the prometheus, and node exporter, and chagne the config file in a manner similar to the yml file attached in this git exporter
 
-3b. Run the pi exporter script from the pi: open a new terminal on the pi or ssh, and now cd into the folder where you're holding the pe2 script 
+3b. 
+
+Run the pi exporter script from the pi: open a new terminal on the pi or ssh, and now cd into the folder where you're holding the pe2 script 
 
 run the following command to compile the cpp files:
 
@@ -44,7 +52,10 @@ Access it through http://<ip-addr>:3000
 5. you can organize the dashboard to your liking.
 
 6. Now, set up the arduino camera 
-6b. ssh into arduino 
+
+6b. 
+
+ssh into arduino 
 
 Download mjpeg_streamer, and use the following command: 
 
